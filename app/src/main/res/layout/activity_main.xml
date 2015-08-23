@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <Button
@@ -15,5 +16,35 @@
         android:text="Generate DB"
         android:onClick="onClick"/>
 
+<!--
+    <ListView
+        android:id="@+id/lvType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
+-->
 
+
+    <!--<Spinner-->
+        <!--android:id="@+id/spType"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+    <!--</Spinner>-->
+
+    <AutoCompleteTextView
+        android:id="@+id/tvType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:imeOptions="actionDone"
+        android:hint="Wprowadź nazwę świadczenia"
+        />
+
+    <Button
+        android:id="@+id/btnFind"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Szukaj terminu"
+        android:onClick="onClick"
+        />
 </LinearLayout>

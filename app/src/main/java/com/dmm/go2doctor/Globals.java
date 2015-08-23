@@ -52,15 +52,15 @@ public class Globals {
     public static String WAITING_TIME_END_MARKER = "</div>";
 
     //marker pairs
-    Pair<String,String> NAME_PAIR = new Pair<>(NAME_START_MARKER, NAME_END_MARKER);
-    Pair<String,String> DIVISION_PAIR = new Pair<>(DIVISION_START_MARKER, DIVISION_END_MARKER);
-    Pair<String,String> ADDRESS_PAIR = new Pair<>(ADDRESS_START_MARKER, ADDRESS_END_MARKER);
-    Pair<String,String> PHONE_PAIR = new Pair<>(PHONE_START_MARKER, PHONE_END_MARKER);
-    Pair<String,String> FIRST_PAIR = new Pair<>(FIRST_START_MARKER, FIRST_END_MARKER);
-    Pair<String,String> INFO_DATE_PAIR = new Pair<>(INFO_DATE_START_MARKER, INFO_DATE_END_MARKER);
-    Pair<String,String> WAITING_PAIR = new Pair<>(WAITING_START_MARKER, WAITING_END_MARKER);
-    Pair<String,String> CROSSED_OUT_PAIR = new Pair<>(CROSSED_OUT_START_MARKER, CROSSED_OUT_END_MARKER);
-    Pair<String,String> WAITING_TIME_PAIR = new Pair<>(WAITING_TIME_START_MARKER, WAITING_TIME_END_MARKER);
+    public static Pair<String,String> NAME_PAIR = new Pair<>(NAME_START_MARKER, NAME_END_MARKER);
+    public static Pair<String,String> DIVISION_PAIR = new Pair<>(DIVISION_START_MARKER, DIVISION_END_MARKER);
+    public static Pair<String,String> ADDRESS_PAIR = new Pair<>(ADDRESS_START_MARKER, ADDRESS_END_MARKER);
+    public static Pair<String,String> PHONE_PAIR = new Pair<>(PHONE_START_MARKER, PHONE_END_MARKER);
+    public static Pair<String,String> FIRST_PAIR = new Pair<>(FIRST_START_MARKER, FIRST_END_MARKER);
+    public static Pair<String,String> INFO_DATE_PAIR = new Pair<>(INFO_DATE_START_MARKER, INFO_DATE_END_MARKER);
+    public static Pair<String,String> WAITING_PAIR = new Pair<>(WAITING_START_MARKER, WAITING_END_MARKER);
+    public static Pair<String,String> CROSSED_OUT_PAIR = new Pair<>(CROSSED_OUT_START_MARKER, CROSSED_OUT_END_MARKER);
+    public static Pair<String,String> WAITING_TIME_PAIR = new Pair<>(WAITING_TIME_START_MARKER, WAITING_TIME_END_MARKER);
 
 
 }
