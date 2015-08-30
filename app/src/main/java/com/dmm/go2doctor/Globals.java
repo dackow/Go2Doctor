@@ -6,6 +6,9 @@ import android.util.Pair;
  * Created by waldekd on 8/22/15.
  */
 public class Globals {
+    //TAG
+    public static String TAG = "Go2DoctorTAG";
+
     //NFZ sites settings
     public static String TYPE_MAIN_URL = "http://kolejki.nfz.gov.pl/Informator/GetSwiadczenie";
     public static String TYPE_URL_PARAMS = "isSzpital=false&isPrzychodnia=false&isInne=false&isPopup=true";
@@ -20,6 +23,9 @@ public class Globals {
     public static String PARSE_DELIMETER = "\",\"";
 
     //HTML parse constants
+    public static String VALIDATION_ERROR_SUMMARY_START_MARKER = "<div class=\"validation-summary-errors\" data-valmsg-summary=\"true\">";
+    public static String VALIDATION_ERROR_SUMMARY_STOP_MARKER = "</div>";
+
     public static String RESULT_SECTION_START_MARKER = "<div id=\"dgvKolejki\">";
     public static String RESULT_SECTION_STOP_MARKER = "<div class=\"navPanel\">";
     public static String RESULTS_DELIMETER = "<div class=\"wynik\">";

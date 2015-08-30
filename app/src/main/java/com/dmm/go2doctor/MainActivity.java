@@ -3,6 +3,7 @@ package com.dmm.go2doctor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements  AsyncResponse{
     String resut = null;
     String final_results = null;
     DataProviderTask data_provider_task = new DataProviderTask();
-    FindTask find_task = new FindTask();
+
     //XML controls
     Button btnGenerateDB = null;
     Button btnFind = null;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements  AsyncResponse{
 //        spType.setEnabled(false);
         tvType.setEnabled(false);
         data_provider_task.async_response = this;
+        generateDB();
         return true;
     }
 
@@ -94,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements  AsyncResponse{
     }
 
 
-    private void find()  {
+    private void find() {
         String type = tvType.getText().toString();
         String encoded = null;
         try {
@@ -103,26 +105,35 @@ public class MainActivity extends AppCompatActivity implements  AsyncResponse{
             e.printStackTrace();
         }
 
-        if(encoded != null) {
-            String params = "IdOwNfz=9&Swiadczenie=" + encoded +"&Miejscowosc=RZESZ%C3%93W&Swiadczeniodawca=&Ulica=";
+        if (encoded != null) {
+            String params = "IdOwNfz=9&Swiadczenie=" + encoded + "&Miejscowosc=RZESZ%C3%93W&Swiadczeniodawca=&Ulica=";
+            FindTask find_task = new FindTask();
             find_task.async_response = new AsyncResponse() {
                 @Override
                 public void processFinish(String search_results) {
+                    int error_start_pos = search_results.indexOf(Globals.VALIDATION_ERROR_SUMMARY_START_MARKER);
+                    int error_end_pos = 0;
 
-                    int start_marker_pos = search_results.indexOf(Globals.RESULT_SECTION_START_MARKER);
-                    int stop_marker_pos = search_results.indexOf(Globals.RESULT_SECTION_STOP_MARKER);
-                    search_results = search_results.substring(start_marker_pos, stop_marker_pos);
+                    //check if some errors happened...
+                    if (error_start_pos != -1) {
+                        error_end_pos = search_results.indexOf(Globals.VALIDATION_ERROR_SUMMARY_STOP_MARKER, error_start_pos);
+                        String error_msg = search_results.substring(error_start_pos, error_end_pos);
+                        Log.e(Globals.TAG,error_msg);
+                    } else{
+                        int start_marker_pos = search_results.indexOf(Globals.RESULT_SECTION_START_MARKER);
+                        int stop_marker_pos = search_results.indexOf(Globals.RESULT_SECTION_STOP_MARKER);
+                        search_results = search_results.substring(start_marker_pos, stop_marker_pos);
 
-                    String[] splitter_results = search_results.split(Globals.RESULTS_DELIMETER);
+                        String[] splitter_results = search_results.split(Globals.RESULTS_DELIMETER);
 
-                    List<SearchResult> result_list = new ArrayList<>();
-                    for(String single_result: splitter_results){
-                        if(!single_result.contains("swd")) {
-                            continue;
-                        }
+                        List<SearchResult> result_list = new ArrayList<>();
+                        for (String single_result : splitter_results) {
+                            if (!single_result.contains("swd")) {
+                                continue;
+                            }
 //            String name = getDataForMarker(name_pair, single_result);
-                        String division = getDataForMarker(Globals.DIVISION_PAIR, single_result);
-                        System.out.println(division);
+                            String division = getDataForMarker(Globals.DIVISION_PAIR, single_result);
+                            System.out.println(division);
 //            String address = getDataForMarker(address_pair, single_result);
 //            String phone = getDataForMarker(phone_pair, single_result);
 //            String first = getDataForMarker(first_pair, single_result);
@@ -132,9 +143,10 @@ public class MainActivity extends AppCompatActivity implements  AsyncResponse{
 //            String waiting_time_out = getDataForMarker(waiting_time_pair, single_result);
 //            SearchResult search_result = new SearchResult(name, division,address,phone,first,info_date,waiting,crossed_out,waiting_time_out);
 //            System.out.println(search_result.toString());
+                        }
+
+
                     }
-
-
                 }
             };
             find_task.execute(Globals.QUEUE_MAIN_URL, Globals.TYPE_URL_PARAMS, Globals.USER_AGENT);
